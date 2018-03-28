@@ -1,0 +1,16 @@
+%chk=C:\Users\William\Documents\chem3DFile\e-donor\D1.chk
+# hf/3-21g 
+
+Title Card Required
+<name>ethene<\name>
+<s>symmetry<\s>
+<l>0.338,2.319,-0.000<\l>
+<r>0.039,-0.760,0.000<\r>
+
+0 1
+C	-0.171	1.343	-0.000
+C	0.547	0.215	0.000
+H	-1.270	1.296	-0.000
+H	0.338	2.319	-0.000
+H	1.646	0.263	0.000
+H	0.039	-0.760	0.000
