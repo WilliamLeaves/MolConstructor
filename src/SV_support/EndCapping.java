@@ -2,9 +2,10 @@ package SV_support;
 
 public class EndCapping extends Molecule {
 	public Atom terminalAtom;
+	public boolean isSymmetry = false;
 
-	public String getType() {
-		return this.getClass().getName();
+	public MolType getType() {
+		return MolType.C;
 	}
 
 	public double[] getTerminalAtomAxis() {

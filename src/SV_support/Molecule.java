@@ -6,6 +6,7 @@ public abstract class Molecule {
 	public String name;
 	public String image2DAddress;
 	public ArrayList<Atom> atomList;
+	public boolean isSymmetry;
 
 	/**
 	 * return the type of molecule:edonor gets D1,e_accepter gets A1,end_capping
@@ -13,7 +14,7 @@ public abstract class Molecule {
 	 * 
 	 * @return
 	 */
-	public abstract String getType();
+	public abstract MolType getType();
 
 	public abstract Atom getLeft();
 

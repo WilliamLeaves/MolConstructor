@@ -15,19 +15,15 @@ public class Builder {
 	 */
 	public CmbMolecule bulidCmbMol(CmbRule cr, Molecule[] molList) {
 		CmbMolecule cm = new CmbMolecule(cr, molList[0]);
-		if (molList.length != cr.molList.size())
+		if (molList.length != cr.typeList.size())
 			return null;
 		for (int i = 0; i < molList.length; i++) {
-			if (!cr.molList.get(i).getType().equals(molList[i].getType())) {
+			if (!cr.typeList.get(i).equals(molList[i].getType())) {
 				return null;
 			}
 		}
 		for (int i = 1; i < molList.length; i++) {
-			boolean isPositive = true;
-			if (!cr.isPositive.get(i)) {
-				isPositive = false;
-			}
-			this.combine(molList[i], cm, isPositive);
+			this.combine(molList[i], cm);
 			cm.name = cm.name.concat("-" + molList[i].name);
 		}
 		return cm;
@@ -44,15 +40,12 @@ public class Builder {
 	 * @param cmol
 	 * @param isPositive
 	 */
-	private void combine(Molecule mol, CmbMolecule cmol, boolean isPositive) {
+	private void combine(Molecule mol, CmbMolecule cmol) {
 		double[] axis;
-		if (isPositive) {
-			axis = aligment(cmol.terminalAtom, mol.getLeft());
-			mol.atomList.remove(mol.getLeft());
-		} else {
-			axis = aligment(cmol.terminalAtom, mol.getRight());
-			mol.atomList.remove(mol.getRight());
-		}
+
+		axis = aligment(cmol.terminalAtom, mol.getLeft());
+		mol.atomList.remove(mol.getLeft());
+
 		for (Atom a : mol.atomList) {
 			a.transCoordinate(axis);
 			cmol.atomList.add(a);

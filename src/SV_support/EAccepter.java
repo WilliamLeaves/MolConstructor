@@ -4,8 +4,8 @@ public class EAccepter extends Molecule {
 	public Atom leftAtom;
 	public Atom rightAtom;
 
-	public String getType() {
-		return this.getClass().getName();
+	public MolType getType() {
+		return MolType.A;
 	}
 
 	public double[] getLeftAtomAxis() {
