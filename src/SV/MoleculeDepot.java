@@ -4,15 +4,22 @@ import java.util.ArrayList;
 
 import DB.DBLink;
 import SV_support.CmbRule;
+import SV_support.EAccepter;
+import SV_support.EDonor;
+import SV_support.EndCapping;
 import SV_support.MolType;
 import SV_support.Molecule;
+import SV_support.PiSpacer;
 
 public class MoleculeDepot {
-	Builder builder;
-	ArrayList<Molecule> molList;
-	ArrayList<CmbRule> ruleList;
-	ArrayList<String> cmbMolNameList;
+	public Builder builder;
+	public ArrayList<EAccepter> aList;
+	public ArrayList<EDonor> dList;
+	public ArrayList<PiSpacer> cList;
+	public ArrayList<EndCapping> sList;
 
+	public ArrayList<CmbRule> ruleList;
+	public ArrayList<String> cmbMolNameList;
 	public DBLink db_link;
 
 	/***
@@ -42,17 +49,79 @@ public class MoleculeDepot {
 				}
 			}
 			this.ruleList.add(rule);
-		}
-		// automatically build combination molecules according with the rule
-		{
+			// automatically build combination molecules according with the rule
+			ArrayList<String[]> strListArray = this.molListCreate(rule);
+			for (int i = 0; i < strListArray.size(); i++) {
+				String[] strList = strListArray.get(i);
+				Molecule[] molList = new Molecule[strList.length];
+				for (int j = 0; j < molList.length; j++) {
+					Molecule mol = null;
+					if (rule.typeList.get(j).equals(MolType.A)) {
+						mol = this.aList.get(Integer.valueOf(strList[j]));
+					} else if (rule.typeList.get(j).equals(MolType.D)) {
+						mol = this.dList.get(Integer.valueOf(strList[j]));
+					} else if (rule.typeList.get(j).equals(MolType.S)) {
+						mol = this.sList.get(Integer.valueOf(strList[j]));
+					} else if (rule.typeList.get(j).equals(MolType.C)) {
+						mol = this.cList.get(Integer.valueOf(strList[j]));
+					}
+					molList[j] = mol;
+				}
+				this.builder.bulidCmbMol(rule, molList);
+				// database changes;
+				{
 
-		}
-		// database changes;
-		{
-
+				}
+			}
 		}
 		return rule.isPermit;
 	}
 
+	/**
+	 * create lots of string lists(aim at molecule's index) by the rule
+	 * 
+	 * @param rule
+	 * @return
+	 */
+	private ArrayList<String[]> molListCreate(CmbRule rule) {
+		int allSize = 1;
+		int[] size = new int[rule.typeList.size()];
+		int depth = rule.typeList.size();
+		for (int i = 0; i < depth; i++) {
+			size[i] = getSize(rule.typeList.get(i));
+			allSize *= size[i];
+		}
+		ArrayList<String[]> charList = new ArrayList<String[]>(allSize);
+		int repeatTime = 1;
+		for (int i = 0; i < depth; i++) {
+			for (int j = 0; j < charList.size(); j++) {
+				int ci = (j % (repeatTime * size[depth - i - 1])) / repeatTime;
+				String c = String.valueOf(ci);
+				charList.get(j)[depth - i - 1] = c;
+			}
+			repeatTime *= size[depth - i - 1];
+		}
+		return charList;
+	}
+
+	/**
+	 * get molecule number from its type
+	 * @param type
+	 * @return
+	 */
+	private int getSize(MolType type) {
+		if (type.equals(MolType.A)) {
+			return this.aList.size();
+		} else if (type.equals(MolType.S)) {
+			return this.sList.size();
+		} else if (type.equals(MolType.C)) {
+			return this.cList.size();
+		} else if (type.equals(MolType.D)) {
+			return this.dList.size();
+		}
+		return 0;
+	}
+	
+	
 	
 }

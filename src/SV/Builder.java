@@ -10,18 +10,11 @@ public class Builder {
 	 * form a new combination molecule by its name list and combination rule
 	 * 
 	 * @param cr
-	 * @param nameList
+	 * @param molList
 	 * @return
 	 */
 	public CmbMolecule bulidCmbMol(CmbRule cr, Molecule[] molList) {
 		CmbMolecule cm = new CmbMolecule(cr, molList[0]);
-		if (molList.length != cr.typeList.size())
-			return null;
-		for (int i = 0; i < molList.length; i++) {
-			if (!cr.typeList.get(i).equals(molList[i].getType())) {
-				return null;
-			}
-		}
 		for (int i = 1; i < molList.length; i++) {
 			this.combine(molList[i], cm);
 			cm.name = cm.name.concat("-" + molList[i].name);
