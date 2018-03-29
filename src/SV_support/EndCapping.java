@@ -1,7 +1,11 @@
 package SV_support;
 
 public class EndCapping extends Molecule {
-	public Atom terminalAtom;
+	public EndCapping() {
+		super();
+		this.rightAtom = this.leftAtom;
+	}
+
 	public boolean isSymmetry = false;
 
 	public MolType getType() {
@@ -9,20 +13,20 @@ public class EndCapping extends Molecule {
 	}
 
 	public double[] getTerminalAtomAxis() {
-		double[] axis = { this.terminalAtom.innerX, this.terminalAtom.innerY, this.terminalAtom.innerZ };
+		double[] axis = { this.leftAtom.innerX, this.leftAtom.innerY, this.leftAtom.innerZ };
 		return axis;
 	}
 
 	@Override
 	public Atom getLeft() {
 		// TODO Auto-generated method stub
-		return this.terminalAtom;
+		return this.leftAtom;
 	}
 
 	@Override
 	public Atom getRight() {
 		// TODO Auto-generated method stub
-		return this.terminalAtom;
+		return this.rightAtom;
 	}
 
 }

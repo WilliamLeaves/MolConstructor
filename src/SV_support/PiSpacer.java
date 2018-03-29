@@ -2,9 +2,6 @@ package SV_support;
 
 public class PiSpacer extends Molecule {
 
-	public Atom leftAtom;
-	public Atom rightAtom;
-
 	public MolType getType() {
 		return MolType.S;
 	}

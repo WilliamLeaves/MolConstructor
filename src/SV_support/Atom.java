@@ -1,12 +1,12 @@
 package SV_support;
 
 public class Atom {
-	public Element element;
+	public String element;
 	public double innerX;
 	public double innerY;
 	public double innerZ;
 
-	public Atom(Element e, double x, double y, double z) {
+	public Atom(String e, double x, double y, double z) {
 		this.innerX = x;
 		this.innerY = y;
 		this.innerZ = z;
@@ -21,5 +21,12 @@ public class Atom {
 			this.innerY += axisList[1];
 			this.innerZ += axisList[2];
 		}
+	}
+
+	public boolean equal(Atom a) {
+		if (a.innerX == this.innerX && a.innerY == this.innerY && a.innerZ == this.innerZ) {
+			return true;
+		}
+		return false;
 	}
 }

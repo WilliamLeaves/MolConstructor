@@ -1,8 +1,7 @@
 package SV_support;
 
 public class EDonor extends Molecule {
-	public Atom leftAtom;
-	public Atom rightAtom;
+
 
 	public MolType getType() {
 		return MolType.D;
