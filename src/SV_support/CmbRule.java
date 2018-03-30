@@ -27,4 +27,19 @@ public class CmbRule {
 			}
 		}
 	}
+	/**
+	 * print itself 
+	 * @return
+	 */
+	public String printRule() {
+		String str = "";
+		for (int i = 0; i < this.typeList.size(); i++) {
+			String type = this.typeList.get(i).toString();
+			str = str.concat(type);
+			if (i != this.typeList.size() - 1) {
+				str = str.concat("-");
+			}
+		}
+		return str;
+	}
 }
