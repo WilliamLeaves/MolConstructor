@@ -2,7 +2,6 @@ package SV_support;
 
 public class EDonor extends Molecule {
 
-
 	public MolType getType() {
 		return MolType.D;
 	}
@@ -27,5 +26,11 @@ public class EDonor extends Molecule {
 	public Atom getRight() {
 		// TODO Auto-generated method stub
 		return this.rightAtom;
+	}
+
+	@Override
+	public EDonor getClone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return (EDonor) this.clone();
 	}
 }

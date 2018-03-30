@@ -29,4 +29,10 @@ public class EndCapping extends Molecule {
 		return this.rightAtom;
 	}
 
+	@Override
+	public EndCapping getClone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return (EndCapping) this.clone();
+	}
+
 }

@@ -3,6 +3,7 @@ package SV;
 import java.util.ArrayList;
 
 import DB.DBLink;
+import SV_support.CmbMolecule;
 import SV_support.CmbRule;
 import SV_support.EAccepter;
 import SV_support.EDonor;
@@ -15,22 +16,47 @@ public class MoleculeDepot {
 	public Builder builder;
 	public ArrayList<EAccepter> aList;
 	public ArrayList<EDonor> dList;
-	public ArrayList<PiSpacer> cList;
-	public ArrayList<EndCapping> sList;
+	public ArrayList<PiSpacer> sList;
+	public ArrayList<EndCapping> cList;
 
 	public ArrayList<CmbRule> ruleList;
 	public ArrayList<String> cmbMolNameList;
+
 	public DBLink db_link;
+
+	public MoleculeDepot(ArrayList<Molecule> molList) {
+		this.db_link = new DBLink();
+		this.aList = new ArrayList<EAccepter>();
+		this.dList = new ArrayList<EDonor>();
+		this.sList = new ArrayList<PiSpacer>();
+		this.cList = new ArrayList<EndCapping>();
+		this.loadList(molList);
+
+		this.ruleList = new ArrayList<CmbRule>();
+		this.cmbMolNameList = new ArrayList<String>();
+
+		this.builder = new Builder();
+	}
 
 	/***
 	 * load the info of molecules and combination molecules and combination rules
 	 * from the dataBase
 	 */
-	public void loadList() {
-
+	private void loadList(ArrayList<Molecule> molList) {
+		for (Molecule mol : molList) {
+			if (mol.getType().equals(MolType.A)) {
+				this.aList.add((EAccepter) mol);
+			} else if (mol.getType().equals(MolType.D)) {
+				this.dList.add((EDonor) mol);
+			} else if (mol.getType().equals(MolType.S)) {
+				this.sList.add((PiSpacer) mol);
+			} else if (mol.getType().equals(MolType.C)) {
+				this.cList.add((EndCapping) mol);
+			}
+		}
 	}
 
-	public boolean cmbRuleCreate(String[] str) {
+	public boolean cmbRuleCreate(String[] str) throws NumberFormatException, CloneNotSupportedException {
 		CmbRule rule = new CmbRule(str);
 		if (rule.isPermit) {
 			for (CmbRule cr : this.ruleList) {
@@ -57,20 +83,20 @@ public class MoleculeDepot {
 				for (int j = 0; j < molList.length; j++) {
 					Molecule mol = null;
 					if (rule.typeList.get(j).equals(MolType.A)) {
-						mol = this.aList.get(Integer.valueOf(strList[j]));
+						mol = this.aList.get(Integer.valueOf(strList[j])).getClone();
 					} else if (rule.typeList.get(j).equals(MolType.D)) {
-						mol = this.dList.get(Integer.valueOf(strList[j]));
+						mol = this.dList.get(Integer.valueOf(strList[j])).getClone();
 					} else if (rule.typeList.get(j).equals(MolType.S)) {
-						mol = this.sList.get(Integer.valueOf(strList[j]));
+						mol = this.sList.get(Integer.valueOf(strList[j])).getClone();
 					} else if (rule.typeList.get(j).equals(MolType.C)) {
-						mol = this.cList.get(Integer.valueOf(strList[j]));
+						mol = this.cList.get(Integer.valueOf(strList[j])).getClone();
 					}
 					molList[j] = mol;
 				}
-				this.builder.bulidCmbMol(rule, molList);
+				CmbMolecule cm = this.builder.bulidCmbMol(rule, molList);
 				// database changes;
 				{
-
+					this.db_link.getCmbMol(cm);
 				}
 			}
 		}
@@ -91,7 +117,11 @@ public class MoleculeDepot {
 			size[i] = getSize(rule.typeList.get(i));
 			allSize *= size[i];
 		}
-		ArrayList<String[]> charList = new ArrayList<String[]>(allSize);
+		ArrayList<String[]> charList = new ArrayList<String[]>();
+		for (int i = 0; i < allSize; i++) {
+			String[] str = new String[depth];
+			charList.add(str);
+		}
 		int repeatTime = 1;
 		for (int i = 0; i < depth; i++) {
 			for (int j = 0; j < charList.size(); j++) {
@@ -101,11 +131,18 @@ public class MoleculeDepot {
 			}
 			repeatTime *= size[depth - i - 1];
 		}
+		// for (String[] strList : charList) {
+		// for (String str : strList) {
+		// System.out.print(str + " ");
+		// }
+		// System.out.println();
+		// }
 		return charList;
 	}
 
 	/**
 	 * get molecule number from its type
+	 * 
 	 * @param type
 	 * @return
 	 */
@@ -121,7 +158,5 @@ public class MoleculeDepot {
 		}
 		return 0;
 	}
-	
-	
-	
+
 }

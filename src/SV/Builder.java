@@ -17,8 +17,14 @@ public class Builder {
 		CmbMolecule cm = new CmbMolecule(cr, molList[0]);
 		for (int i = 1; i < molList.length; i++) {
 			this.combine(molList[i], cm);
-			cm.name = cm.name.concat("-" + molList[i].name);
+
+			cm.name = cm.name.concat("-" + molList[i].getType().toString() + String.valueOf(molList[i].index));
 		}
+		// for (Atom a : cm.atomList) {
+		// System.out.println(a.element + "," + a.innerX + "," + a.innerY + "," +
+		// a.innerZ);
+		// }
+
 		return cm;
 	}
 
@@ -34,8 +40,15 @@ public class Builder {
 	 * @param isPositive
 	 */
 	private void combine(Molecule mol, CmbMolecule cmol) {
+		System.out.println("*************mol");
+		for (Atom a : mol.atomList) {
+			System.out.println(a.element + "," + a.innerX + "," + a.innerY + "," + a.innerZ);
+		}
+		System.out.println("**************cmol");
+		for (Atom a : cmol.atomList) {
+			System.out.println(a.element + "," + a.innerX + "," + a.innerY + "," + a.innerZ);
+		}
 		double[] axis;
-
 		axis = aligment(cmol.terminalAtom, mol.getLeft());
 		mol.atomList.remove(mol.getLeft());
 
@@ -43,6 +56,7 @@ public class Builder {
 			a.transCoordinate(axis);
 			cmol.atomList.add(a);
 		}
+		cmol.terminalAtom = mol.getRight();
 	}
 
 	/**

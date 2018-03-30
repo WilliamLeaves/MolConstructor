@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,23 +19,10 @@ import SV_support.Molecule;
 import SV_support.PiSpacer;
 
 public class IOservice {
+	public ArrayList<Molecule> loadMolecules() throws IOException {
 
-	/**
-	 * io test
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		IOservice m = new IOservice();
-		try {
-			m.loadMolecules();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ArrayList<Molecule> molList = new ArrayList<Molecule>();
 
-	}
-
-	public void loadMolecules() throws IOException {
 		String rootFile = "gjf_input";
 		String[] foldName = { "e-donor", "e-acceptor", "pi-spacer", "end-capping" };
 		String[] typeName = { "D", "A", "S", "C" };
@@ -47,17 +35,17 @@ public class IOservice {
 				File f = new File(path);
 				if (f.exists()) {
 					System.out.println(path);
-					this.loadMolFromGJF(f, typeName[i], i);
+					molList.add(this.loadMolFromGJF(f, typeName[i], j));
 					j++;
 				} else {
 					break;
 				}
 			}
 		}
-
+		return molList;
 	}
 
-	public void loadMolFromGJF(File file, String type, int index) throws IOException {
+	public Molecule loadMolFromGJF(File file, String type, int index) throws IOException {
 		String str = "";
 		FileInputStream out = new FileInputStream(file);
 		InputStreamReader isr = new InputStreamReader(out);
@@ -150,7 +138,8 @@ public class IOservice {
 				}
 			}
 		}
-		// this.export(m);
+		m.index = index;
+		return m;
 	}
 
 	public void export(CmbMolecule cm) {

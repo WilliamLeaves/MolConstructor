@@ -1,7 +1,6 @@
 package SV_support;
 
 public class EAccepter extends Molecule {
-	
 
 	public MolType getType() {
 		return MolType.A;
@@ -27,5 +26,11 @@ public class EAccepter extends Molecule {
 	public Atom getRight() {
 		// TODO Auto-generated method stub
 		return this.rightAtom;
+	}
+
+	@Override
+	public EAccepter getClone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return (EAccepter) this.clone();
 	}
 }

@@ -27,4 +27,11 @@ public class PiSpacer extends Molecule {
 		// TODO Auto-generated method stub
 		return this.rightAtom;
 	}
+
+	@Override
+	public PiSpacer getClone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return (PiSpacer) this.clone();
+	}
+
 }

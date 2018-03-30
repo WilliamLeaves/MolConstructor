@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CmbRule {
 	public boolean isPermit;
-	public ArrayList<MolType> typeList;
+	public ArrayList<MolType> typeList=new ArrayList<MolType>();
 
 	public CmbRule(String[] str) {
 		this.isPermit = true;
@@ -22,13 +22,15 @@ public class CmbRule {
 				return;
 			}
 			if (i == 0 || i == str.length - 1) {
-				if (str[i].equals("C"))
+				if (!str[i].equals("C"))
 					this.isPermit = false;
 			}
 		}
 	}
+
 	/**
-	 * print itself 
+	 * print itself
+	 * 
 	 * @return
 	 */
 	public String printRule() {

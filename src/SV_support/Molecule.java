@@ -3,6 +3,7 @@ package SV_support;
 import java.util.ArrayList;
 
 public abstract class Molecule {
+	public int index = 0;
 	public String name = "Unnamed";
 	public String image2DAddress = "";
 	public ArrayList<Atom> atomList = new ArrayList<Atom>();
@@ -21,4 +22,6 @@ public abstract class Molecule {
 	public abstract Atom getLeft();
 
 	public abstract Atom getRight();
+
+	public abstract Molecule getClone() throws CloneNotSupportedException;
 }
