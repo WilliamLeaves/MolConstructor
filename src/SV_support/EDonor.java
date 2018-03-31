@@ -17,20 +17,17 @@ public class EDonor extends Molecule {
 	}
 
 	@Override
-	public Atom getLeft() {
+	public EDonor getClone() {
 		// TODO Auto-generated method stub
-		return this.leftAtom;
-	}
-
-	@Override
-	public Atom getRight() {
-		// TODO Auto-generated method stub
-		return this.rightAtom;
-	}
-
-	@Override
-	public EDonor getClone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return (EDonor) this.clone();
+		EDonor m = new EDonor();
+		m.image2DAddress = this.image2DAddress;
+		m.index = this.index;
+		m.isSymmetry = this.isSymmetry;
+		for (Atom a : this.atomList) {
+			m.atomList.add((Atom) a.clone());
+		}
+		m.leftAtom = (Atom) this.leftAtom.clone();
+		m.rightAtom = (Atom) this.rightAtom.clone();
+		return m;
 	}
 }

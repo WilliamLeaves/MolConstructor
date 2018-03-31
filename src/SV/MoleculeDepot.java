@@ -89,7 +89,12 @@ public class MoleculeDepot {
 					} else if (rule.typeList.get(j).equals(MolType.S)) {
 						mol = this.sList.get(Integer.valueOf(strList[j])).getClone();
 					} else if (rule.typeList.get(j).equals(MolType.C)) {
-						mol = this.cList.get(Integer.valueOf(strList[j])).getClone();
+						if (j != molList.length - 1) {
+							mol = this.cList.get(Integer.valueOf(strList[j])).getClone();
+						} else {
+							mol = this.cList.get(Integer.valueOf(strList[j])).getRotateClone();
+						}
+
 					}
 					molList[j] = mol;
 				}

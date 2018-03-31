@@ -18,21 +18,34 @@ public class EndCapping extends Molecule {
 	}
 
 	@Override
-	public Atom getLeft() {
+	public EndCapping getClone() {
 		// TODO Auto-generated method stub
-		return this.leftAtom;
+		EndCapping m = new EndCapping();
+		m.image2DAddress = this.image2DAddress;
+		m.index = this.index;
+		m.isSymmetry = this.isSymmetry;
+		for (Atom a : this.atomList) {
+			m.atomList.add((Atom) a.clone());
+		}
+		m.leftAtom = (Atom) this.leftAtom.clone();
+		return m;
 	}
 
-	@Override
-	public Atom getRight() {
+	public Molecule getRotateClone() {
 		// TODO Auto-generated method stub
-		return this.rightAtom;
-	}
-
-	@Override
-	public EndCapping getClone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return (EndCapping) this.clone();
+		EndCapping m = new EndCapping();
+		m.image2DAddress = this.image2DAddress;
+		m.index = this.index;
+		m.isSymmetry = this.isSymmetry;
+		for (Atom a : this.atomList) {
+			Atom atom = (Atom) a.clone();
+			atom.rotate();
+			m.atomList.add(atom);
+		}
+		Atom atom = (Atom) this.leftAtom.clone();
+		atom.rotate();
+		m.leftAtom = atom;
+		return m;
 	}
 
 }

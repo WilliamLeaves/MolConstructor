@@ -117,7 +117,7 @@ public class IOservice {
 			Atom atom = new Atom("H", x, y, z);
 			for (Atom a : m.atomList) {
 				if (a.equal(atom)) {
-					m.leftAtom = a;
+					m.leftAtom = atom;
 					break;
 				}
 			}
@@ -133,7 +133,7 @@ public class IOservice {
 			Atom atom = new Atom("H", x, y, z);
 			for (Atom a : m.atomList) {
 				if (a.equal(atom)) {
-					m.rightAtom = a;
+					m.rightAtom = atom;
 					break;
 				}
 			}

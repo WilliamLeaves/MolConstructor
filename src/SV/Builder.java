@@ -40,14 +40,14 @@ public class Builder {
 	 * @param isPositive
 	 */
 	private void combine(Molecule mol, CmbMolecule cmol) {
-		System.out.println("*************mol");
-		for (Atom a : mol.atomList) {
-			System.out.println(a.element + "," + a.innerX + "," + a.innerY + "," + a.innerZ);
-		}
-		System.out.println("**************cmol");
-		for (Atom a : cmol.atomList) {
-			System.out.println(a.element + "," + a.innerX + "," + a.innerY + "," + a.innerZ);
-		}
+//		System.out.println("*************mol");
+//		for (Atom a : mol.atomList) {
+//			System.out.println(a.element + "," + a.innerX + "," + a.innerY + "," + a.innerZ);
+//		}
+//		System.out.println("**************cmol");
+//		for (Atom a : cmol.atomList) {
+//			System.out.println(a.element + "," + a.innerX + "," + a.innerY + "," + a.innerZ);
+//		}
 		double[] axis;
 		axis = aligment(cmol.terminalAtom, mol.getLeft());
 		mol.atomList.remove(mol.getLeft());
@@ -70,7 +70,7 @@ public class Builder {
 	private double[] aligment(Atom left, Atom right) {
 		double[] axis = new double[3];
 		axis[0] = left.innerX - right.innerX;
-		axis[1] = left.innerX - right.innerY;
+		axis[1] = left.innerY - right.innerY;
 		axis[2] = left.innerZ - right.innerZ;
 		return axis;
 	}

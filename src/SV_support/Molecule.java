@@ -2,7 +2,7 @@ package SV_support;
 
 import java.util.ArrayList;
 
-public abstract class Molecule {
+public abstract class Molecule implements Cloneable {
 	public int index = 0;
 	public String name = "Unnamed";
 	public String image2DAddress = "";
@@ -19,9 +19,21 @@ public abstract class Molecule {
 	 */
 	public abstract MolType getType();
 
-	public abstract Atom getLeft();
+	public Atom getLeft() {
+		return this.leftAtom;
+	}
 
-	public abstract Atom getRight();
+	public Atom getRight() {
+		return this.rightAtom;
+	}
 
-	public abstract Molecule getClone() throws CloneNotSupportedException;
+	public abstract Molecule getClone();
+
+	/**
+	 * make the terminal atom have max x-axis
+	 */
+	public void rotate() {
+
+	}
+
 }

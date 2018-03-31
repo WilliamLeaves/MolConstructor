@@ -1,6 +1,6 @@
 package SV_support;
 
-public class Atom {
+public class Atom implements Cloneable {
 	public String element;
 	public double innerX;
 	public double innerY;
@@ -28,5 +28,21 @@ public class Atom {
 			return true;
 		}
 		return false;
+	}
+
+	public Object clone() {
+		Atom a = null;
+		try {
+			a = (Atom) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return a;
+	}
+
+	public void rotate() {
+		this.innerX = -innerX;
+		this.innerY = -innerY;
+		this.innerZ = -innerZ;
 	}
 }
