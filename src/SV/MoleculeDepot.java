@@ -92,7 +92,7 @@ public class MoleculeDepot {
 						if (j != molList.length - 1) {
 							mol = this.cList.get(Integer.valueOf(strList[j])).getClone();
 						} else {
-							mol = this.cList.get(Integer.valueOf(strList[j])).getRotateClone();
+							mol = this.cList.get(Integer.valueOf(strList[j])).getMirrorClone();
 						}
 
 					}

@@ -22,10 +22,10 @@ public class Function_test {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String[] str = { "C","C" };
-		md.cmbRuleCreate(str);
-		for (CmbMolecule cm : md.db_link.cmbList) {
-			//io.export(cm);
-		}
+		// String[] str = { "C","A","C" };
+		// md.cmbRuleCreate(str);
+		// for (CmbMolecule cm : md.db_link.cmbList) {
+		// io.export(cm);
+		// }
 	}
 }

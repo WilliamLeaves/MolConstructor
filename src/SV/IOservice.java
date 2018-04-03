@@ -23,25 +23,25 @@ public class IOservice {
 
 		ArrayList<Molecule> molList = new ArrayList<Molecule>();
 
-		String rootFile = "gjf_input";
-		String[] foldName = { "e-donor", "e-acceptor", "pi-spacer", "end-capping" };
-		String[] typeName = { "D", "A", "S", "C" };
-		// String path = "gjf_input/pi-spacer/S2.gjf";
-		// this.loadMolFromGJF(new File(path), "S", 2);
-		for (int i = 0; i < 4; i++) {
-			int j = 1;
-			while (true) {
-				String path = rootFile + "/" + foldName[i] + "/" + typeName[i] + String.valueOf(j) + ".gjf";
-				File f = new File(path);
-				if (f.exists()) {
-					System.out.println(path);
-					molList.add(this.loadMolFromGJF(f, typeName[i], j));
-					j++;
-				} else {
-					break;
-				}
-			}
-		}
+//		String rootFile = "gjf_input";
+//		String[] foldName = { "e-donor", "e-acceptor", "pi-spacer", "end-capping" };
+//		String[] typeName = { "D", "A", "S", "C" };
+//		for (int i = 0; i < 4; i++) {
+//			int j = 1;
+//			while (true) {
+//				String path = rootFile + "/" + foldName[i] + "/" + typeName[i] + String.valueOf(j) + ".gjf";
+//				File f = new File(path);
+//				if (f.exists()) {
+//					System.out.println(path);
+//					molList.add(this.loadMolFromGJF(f, typeName[i], j));
+//					j++;
+//				} else {
+//					break;
+//				}
+//			}
+//		}
+		String path = "gjf_input/e-donor/D1.gjf";
+		this.loadMolFromGJF(new File(path), "D", 1);
 		return molList;
 	}
 
@@ -139,6 +139,8 @@ public class IOservice {
 			}
 		}
 		m.index = index;
+		m.rotateToFit();
+		this.export(m);
 		return m;
 	}
 
@@ -171,34 +173,33 @@ public class IOservice {
 		}
 	}
 
-	// public void export(Molecule cm) {
-	// String path = "output/";
-	// try {
-	// // System.out.println(cm.name);
-	// String n = cm.name;
-	// n = n.replace(":", "~");
-	// FileWriter fw = new FileWriter(path + n + ".gjf", true);
-	// BufferedWriter bw = new BufferedWriter(fw);
-	//
-	// // change to output format
-	// {
-	// bw.write("%chk=C:\\Users\\William\\Documents\\chem3DFile\\e-donor\\D1.chk\n");
-	// bw.write("# opt hf/6-311g\n\n");
-	// bw.write("Title Card Required\n");
-	// bw.write("<name>" + cm.name + "<\\name>\n\n");
-	// // bw.write("<cr>" + cm.rule.printRule() + "<\\cr>\r\n\n");
-	// bw.write("0 1\n");
-	// for (Atom a : cm.atomList) {
-	// bw.write(" " + a.element + "\t" + a.innerX + "\t" + a.innerY + "\t" +
-	// a.innerZ + "\n");
-	// }
-	// // System.out.println(cm.name + " complete");
-	// }
-	// bw.close();
-	// fw.close();
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// }
+	public void export(Molecule cm) {
+		String path = "output/";
+		try {
+			// System.out.println(cm.name);
+			String n = cm.name;
+			n = n.replace(":", "~");
+			FileWriter fw = new FileWriter(path + n + ".gjf", true);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			// change to output format
+			{
+				bw.write("%chk=C:\\Users\\William\\Documents\\chem3DFile\\e-donor\\D1.chk\n");
+				bw.write("# opt hf/6-311g\n\n");
+				bw.write("Title Card Required\n");
+				bw.write("<name>" + cm.name + "<\\name>\n\n");
+				// bw.write("<cr>" + cm.rule.printRule() + "<\\cr>\r\n\n");
+				bw.write("0 1\n");
+				for (Atom a : cm.atomList) {
+					bw.write(" " + a.element + "\t" + a.innerX + "\t" + a.innerY + "\t" + a.innerZ + "\n");
+				}
+				// System.out.println(cm.name + " complete");
+			}
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

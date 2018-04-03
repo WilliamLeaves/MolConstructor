@@ -31,7 +31,7 @@ public class EndCapping extends Molecule {
 		return m;
 	}
 
-	public Molecule getRotateClone() {
+	public Molecule getMirrorClone() {
 		// TODO Auto-generated method stub
 		EndCapping m = new EndCapping();
 		m.image2DAddress = this.image2DAddress;
@@ -39,11 +39,11 @@ public class EndCapping extends Molecule {
 		m.isSymmetry = this.isSymmetry;
 		for (Atom a : this.atomList) {
 			Atom atom = (Atom) a.clone();
-			atom.rotate();
+			atom.mirror();
 			m.atomList.add(atom);
 		}
 		Atom atom = (Atom) this.leftAtom.clone();
-		atom.rotate();
+		atom.mirror();
 		m.leftAtom = atom;
 		return m;
 	}
