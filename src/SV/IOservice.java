@@ -23,25 +23,25 @@ public class IOservice {
 
 		ArrayList<Molecule> molList = new ArrayList<Molecule>();
 
-//		String rootFile = "gjf_input";
-//		String[] foldName = { "e-donor", "e-acceptor", "pi-spacer", "end-capping" };
-//		String[] typeName = { "D", "A", "S", "C" };
-//		for (int i = 0; i < 4; i++) {
-//			int j = 1;
-//			while (true) {
-//				String path = rootFile + "/" + foldName[i] + "/" + typeName[i] + String.valueOf(j) + ".gjf";
-//				File f = new File(path);
-//				if (f.exists()) {
-//					System.out.println(path);
-//					molList.add(this.loadMolFromGJF(f, typeName[i], j));
-//					j++;
-//				} else {
-//					break;
-//				}
-//			}
-//		}
-		String path = "gjf_input/e-donor/D1.gjf";
-		this.loadMolFromGJF(new File(path), "D", 1);
+		String rootFile = "gjf_input";
+		String[] foldName = { "e-donor", "e-acceptor", "pi-spacer", "end-capping" };
+		String[] typeName = { "D", "A", "S", "C" };
+		for (int i = 0; i < 4; i++) {
+			int j = 1;
+			while (true) {
+				String path = rootFile + "/" + foldName[i] + "/" + typeName[i] + String.valueOf(j) + ".gjf";
+				File f = new File(path);
+				if (f.exists()) {
+					System.out.println("loading:" + path);
+					molList.add(this.loadMolFromGJF(f, typeName[i], j));
+					j++;
+				} else {
+					break;
+				}
+			}
+		}
+		// String path = "gjf_input/e-donor/D1.gjf";
+		// this.loadMolFromGJF(new File(path), "D", 1);
 		return molList;
 	}
 
@@ -140,7 +140,7 @@ public class IOservice {
 		}
 		m.index = index;
 		m.rotateToFit();
-		this.export(m);
+		// this.export(m);
 		return m;
 	}
 
