@@ -54,7 +54,7 @@ public abstract class Molecule implements Cloneable {
 		for (int i = 0; i < N; i++) {
 			t.clockWiseRotateZ(360 / N);
 			tn.clockWiseRotateZ(360 / N);
-			if (Math.abs(this.getAtomVector(t, tn)[1]) < des) {
+			if (Math.abs(this.getAtomVector(t, tn)[1]) < des && this.getAtomVector(t, tn)[0] < 0) {
 				des = Math.abs(this.getAtomVector(t, tn)[1]);
 				nz = i;
 			}
@@ -73,7 +73,7 @@ public abstract class Molecule implements Cloneable {
 		for (int i = 0; i < N; i++) {
 			t.clockWiseRotateY(360 / N);
 			tn.clockWiseRotateY(360 / N);
-			if (Math.abs(this.getAtomVector(t, tn)[2]) < des) {
+			if (Math.abs(this.getAtomVector(t, tn)[2]) < des && this.getAtomVector(t, tn)[0] < 0) {
 				des = Math.abs(this.getAtomVector(t, tn)[2]);
 				ny = i;
 			}
@@ -90,6 +90,19 @@ public abstract class Molecule implements Cloneable {
 			// + "," + this.getAtomVector(t, tn)[2]);
 		}
 
+		// boolean isXRotateNeeded = false;
+		// for (Atom a : this.atomList) {
+		// if (a.innerX < this.getLeft().innerX) {
+		// isXRotateNeeded = true;
+		// break;
+		// }
+		// }
+		// if (isXRotateNeeded) {
+		// for (Atom a : this.atomList) {
+		// a.clockWiseRotateX(90);
+		// }
+		// System.out.println(this.name + "_Xrotate");
+		// }
 		// set the left and right
 		this.leftAtom = (Atom) this.atomList.get(l).clone();
 		if (this.rightAtom != null) {
@@ -97,13 +110,14 @@ public abstract class Molecule implements Cloneable {
 		}
 
 		// check
-//		t = this.leftAtom;
-//		tn = this.getNearestAtom(t);
-//		if (Math.abs(this.getAtomVector(t, tn)[1]) < 0.01 && Math.abs(this.getAtomVector(t, tn)[2]) < 0.01) {
-//			System.out.println("fine");
-//		}else {
-//			System.out.println("error");
-//		}
+		// t = this.leftAtom;
+		// tn = this.getNearestAtom(t);
+		// if (Math.abs(this.getAtomVector(t, tn)[1]) < 0.01 &&
+		// Math.abs(this.getAtomVector(t, tn)[2]) < 0.01) {
+		// System.out.println("fine");
+		// }else {
+		// System.out.println("error");
+		// }
 
 	}
 

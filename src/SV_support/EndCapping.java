@@ -45,6 +45,12 @@ public class EndCapping extends Molecule {
 		Atom atom = (Atom) this.leftAtom.clone();
 		atom.mirror();
 		m.leftAtom = atom;
+		
+		
+		
+		
+		
+		
 		return m;
 	}
 

@@ -21,10 +21,10 @@ public class CmbRule {
 				this.isPermit = false;
 				return;
 			}
-			if (i == 0 || i == str.length - 1) {
-				if (!str[i].equals("C"))
-					this.isPermit = false;
-			}
+			// if (i == 0 || i == str.length - 1) {
+			// if (!str[i].equals("C"))
+			// this.isPermit = false;
+			// }
 		}
 	}
 

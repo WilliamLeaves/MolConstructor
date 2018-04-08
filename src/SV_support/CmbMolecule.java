@@ -14,6 +14,6 @@ public class CmbMolecule {
 		for (Atom a : mol.atomList) {
 			this.atomList.add(a);
 		}
-		this.terminalAtom = (Atom) mol.getLeft().clone();
+		this.terminalAtom = (Atom) mol.getRight().clone();
 	}
 }

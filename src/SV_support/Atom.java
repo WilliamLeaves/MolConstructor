@@ -46,9 +46,8 @@ public class Atom implements Cloneable {
 	}
 
 	public void mirror() {
-		this.innerX = -innerX;
-		this.innerY = -innerY;
-		this.innerZ = -innerZ;
+		this.clockWiseRotateY(180);
+		this.clockWiseRotateZ(180);
 	}
 
 	// rotate the Atom by theta degree along the Z-axis
@@ -73,6 +72,19 @@ public class Atom implements Cloneable {
 			double x = this.innerX * Math.cos(p) + this.innerZ * Math.sin(p);
 			double z = this.innerZ * Math.cos(p) - this.innerX * Math.sin(p);
 			this.innerX = x;
+			this.innerZ = z;
+		}
+	}
+
+	// rotate the Atom by theta degree along the X-axis
+	public void clockWiseRotateX(double theta) {
+		if (theta < -360 || theta > 360) {
+			return;
+		} else {
+			double p = (theta / 360) * 2 * Math.PI;
+			double y = this.innerY * Math.cos(p) + this.innerZ * Math.sin(p);
+			double z = this.innerZ * Math.cos(p) - this.innerY * Math.sin(p);
+			this.innerY = y;
 			this.innerZ = z;
 		}
 	}
