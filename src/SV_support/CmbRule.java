@@ -2,9 +2,9 @@ package SV_support;
 
 import java.util.ArrayList;
 
-public class CmbRule {
+public class CmbRule implements Cloneable {
 	public boolean isPermit;
-	public ArrayList<MolType> typeList=new ArrayList<MolType>();
+	public ArrayList<MolType> typeList = new ArrayList<MolType>();
 
 	public CmbRule(String[] str) {
 		this.isPermit = true;

@@ -1,6 +1,8 @@
 package SV_support;
 
 public class EndCapping extends Molecule {
+	public Atom rightAtom = leftAtom;
+
 	public EndCapping() {
 		super();
 		this.rightAtom = this.leftAtom;
@@ -26,8 +28,11 @@ public class EndCapping extends Molecule {
 		m.isSymmetry = this.isSymmetry;
 		for (Atom a : this.atomList) {
 			m.atomList.add((Atom) a.clone());
+			if (a.equal(this.leftAtom)) {
+				m.leftAtom = a;
+				m.rightAtom = a;
+			}
 		}
-		m.leftAtom = (Atom) this.leftAtom.clone();
 		return m;
 	}
 
@@ -39,18 +44,14 @@ public class EndCapping extends Molecule {
 		m.isSymmetry = this.isSymmetry;
 		for (Atom a : this.atomList) {
 			Atom atom = (Atom) a.clone();
+			if (a.equal(this.leftAtom)) {
+				m.leftAtom = atom;
+				m.rightAtom = atom;
+			}
 			atom.mirror();
 			m.atomList.add(atom);
+
 		}
-		Atom atom = (Atom) this.leftAtom.clone();
-		atom.mirror();
-		m.leftAtom = atom;
-		
-		
-		
-		
-		
-		
 		return m;
 	}
 

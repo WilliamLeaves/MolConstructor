@@ -25,9 +25,13 @@ public class EAccepter extends Molecule {
 		m.isSymmetry = this.isSymmetry;
 		for (Atom a : this.atomList) {
 			m.atomList.add((Atom) a.clone());
+			if (a.equal(this.leftAtom)) {
+				m.leftAtom = a;
+			}
+			if (a.equal(this.rightAtom)) {
+				m.rightAtom = a;
+			}
 		}
-		m.leftAtom = (Atom) this.leftAtom.clone();
-		m.rightAtom = (Atom) this.rightAtom.clone();
 		return m;
 	}
 }

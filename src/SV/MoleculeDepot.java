@@ -136,12 +136,6 @@ public class MoleculeDepot {
 			}
 			repeatTime *= size[depth - i - 1];
 		}
-		// for (String[] strList : charList) {
-		// for (String str : strList) {
-		// System.out.print(str + " ");
-		// }
-		// System.out.println();
-		// }
 		return charList;
 	}
 

@@ -117,7 +117,7 @@ public class IOservice {
 			Atom atom = new Atom("H", x, y, z);
 			for (Atom a : m.atomList) {
 				if (a.equal(atom)) {
-					m.leftAtom = atom;
+					m.leftAtom = a;
 					break;
 				}
 			}
@@ -133,14 +133,14 @@ public class IOservice {
 			Atom atom = new Atom("H", x, y, z);
 			for (Atom a : m.atomList) {
 				if (a.equal(atom)) {
-					m.rightAtom = atom;
+					m.rightAtom = a;
 					break;
 				}
 			}
 		}
 		m.index = index;
 		m.rotateToFit();
-		//this.export(m);
+		// this.export(m);
 		return m;
 	}
 

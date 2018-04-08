@@ -82,8 +82,8 @@ public class Atom implements Cloneable {
 			return;
 		} else {
 			double p = (theta / 360) * 2 * Math.PI;
-			double y = this.innerY * Math.cos(p) + this.innerZ * Math.sin(p);
-			double z = this.innerZ * Math.cos(p) - this.innerY * Math.sin(p);
+			double z = this.innerZ * Math.cos(p) + this.innerY * Math.sin(p);
+			double y = this.innerY * Math.cos(p) - this.innerZ * Math.sin(p);
 			this.innerY = y;
 			this.innerZ = z;
 		}
