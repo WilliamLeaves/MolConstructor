@@ -39,18 +39,20 @@ public class Builder {
 	 */
 	private void combine(Molecule mol, CmbMolecule cmol) {
 		boolean isComplete = false;
-		int num = 0;
-		int split = 4;
+		int split = 12;
+
+		double centerDis[] = new double[split];
+		for (int i = 0; i < split; i++) {
+			centerDis[i] = -1;
+		}
+
 		for (int i = 0; i < split; i++) {
 			Molecule mol_clone = mol.getClone();
 			CmbMolecule cmol_clone = cmol.getClone();
-			int n = -1, m = -1, rIndex = -1;
+			int n = -1, m = -1;
 			for (Atom a : mol_clone.atomList) {
 				if (a.equal(mol_clone.getLeft())) {
 					n = mol_clone.atomList.indexOf(a);
-				}
-				if (mol_clone.getRight() != null && a.equal(mol_clone.getRight())) {
-					rIndex = mol_clone.atomList.indexOf(a);
 				}
 			}
 			for (Atom a : cmol_clone.atomList) {
@@ -72,14 +74,27 @@ public class Builder {
 
 			}
 			if (this.isNotOverlap(cmol_clone, mol_clone)) {
-				num = i;
+				centerDis[i] = Math.pow(cmol_clone.getcenter()[0] - mol_clone.getcenter()[0], 2)
+						+ Math.pow(cmol_clone.getcenter()[1] - mol_clone.getcenter()[1], 2)
+						+ Math.pow(cmol_clone.getcenter()[2] - mol_clone.getcenter()[2], 2);
 				isComplete = true;
-				break;
 			}
 		}
 		if (isComplete == false) {
-			System.out.println("method overlap error");
+			System.out.println("*********************method overlap error");
 		}
+		int maxIndex = 0;
+		for (int i = 0; i < split; i++) {
+			// System.out.println(centerDis[i]);
+			if (centerDis[i] < 0) {
+				continue;
+			} else {
+				if (centerDis[i] > centerDis[maxIndex]) {
+					maxIndex = i;
+				}
+			}
+		}
+
 		int n = -1, m = -1, rIndex = -1;
 		for (Atom a : mol.atomList) {
 			if (a.equal(mol.getLeft())) {
@@ -94,10 +109,11 @@ public class Builder {
 				m = cmol.atomList.indexOf(a);
 			}
 		}
+
 		for (Atom a : mol.atomList) {
-			a.clockWiseRotateX(360 * num / split);
+			a.clockWiseRotateX(360 * maxIndex / split);
 		}
-		System.out.println("X rotated " + 360 * num / split + " degree");
+		System.out.println("X rotated " + 360 * maxIndex / split + " degree");
 		double[] axis;
 		axis = aligment(cmol.terminalAtom, mol.getNearestAtom(mol.getLeft()));
 		cmol.atomList.remove(m);
@@ -106,16 +122,20 @@ public class Builder {
 			a.transCoordinate(axis);
 
 		}
+		// System.out.println(mol.atomList.get(rIndex).equal(mol.getRight()));
 		for (Atom a : mol.atomList) {
 			if (mol.atomList.indexOf(a) != n)
 				cmol.atomList.add(a);
+			// if (mol.getRight() != null && a.equal(mol.getRight())) {
+			// cmol.terminalAtom = a;
+			// System.out.println("terminal atom changed " +
+			// cmol.atomList.contains(cmol.terminalAtom));
+			// }
 		}
 
-		if (mol.getRight() != null && rIndex != -1) {
-			cmol.terminalAtom = mol.getRight();
-			System.out.println("terminal atom changed");
-		}
-
+		cmol.terminalAtom = mol.atomList.get(rIndex);
+		System.out.println("right atom changed ");
+		cmol.rotateToFit();
 	}
 
 	/**
@@ -138,9 +158,10 @@ public class Builder {
 		for (Atom a : cmol.atomList) {
 			for (Atom b : mol.atomList) {
 				double dissqrt = a.calDistance(b);
-				// System.out.println(dissqrt);
-				if (dissqrt <1.75) {
-					if (!a.equal(cmol.terminalAtom) || !b.equal(mol.leftAtom)) {
+				if (dissqrt < 1.75) {
+					if (!a.equal(cmol.getNearestAtom(cmol.terminalAtom))
+							|| !b.equal(mol.getNearestAtom(mol.leftAtom))) {
+						// System.out.println(dissqrt);
 						return false;
 					}
 				}

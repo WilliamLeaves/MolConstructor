@@ -158,4 +158,18 @@ public abstract class Molecule implements Cloneable {
 	public double[] getAtomVector(Atom a, Atom b) {
 		return new double[] { a.innerX - b.innerX, a.innerY - b.innerY, a.innerZ - b.innerZ };
 	}
+
+	public double[] getcenter() {
+		double[] axis = { 0, 0, 0 };
+		for (Atom a : this.atomList) {
+			axis[0] += a.innerX;
+			axis[1] += a.innerY;
+			axis[2] += a.innerZ;
+		}
+		axis[0] /= this.atomList.size();
+		axis[1] /= this.atomList.size();
+		axis[2] /= this.atomList.size();
+		return axis;
+	}
+
 }
