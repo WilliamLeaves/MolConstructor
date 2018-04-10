@@ -15,10 +15,10 @@ public class Builder {
 	 */
 	public CmbMolecule bulidCmbMol(CmbRule cr, Molecule[] molList) {
 		CmbMolecule cm = new CmbMolecule(cr, molList[0]);
-		for (int i = 0; i < molList.length; i++) {
-			System.out.print(cr.typeList.get(i).toString() + molList[i].index + "-");
-		}
-		System.out.println();
+		// for (int i = 0; i < molList.length; i++) {
+		// System.out.print(cr.typeList.get(i).toString() + molList[i].index + "-");
+		// }
+		// System.out.println();
 		for (int i = 1; i < molList.length; i++) {
 			this.combine(molList[i], cm);
 
@@ -113,7 +113,7 @@ public class Builder {
 		for (Atom a : mol.atomList) {
 			a.clockWiseRotateX(360 * maxIndex / split);
 		}
-		System.out.println("X rotated " + 360 * maxIndex / split + " degree");
+		//System.out.println("X rotated " + 360 * maxIndex / split + " degree");
 		double[] axis;
 		axis = aligment(cmol.terminalAtom, mol.getNearestAtom(mol.getLeft()));
 		cmol.atomList.remove(m);
@@ -134,7 +134,7 @@ public class Builder {
 		}
 
 		cmol.terminalAtom = mol.atomList.get(rIndex);
-		System.out.println("right atom changed ");
+		//System.out.println("right atom changed ");
 		cmol.rotateToFit();
 	}
 

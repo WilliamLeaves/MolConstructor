@@ -19,7 +19,7 @@ public class CmbMolecule {
 			this.atomList.add(a);
 			if (a.equal(mol.getRight())) {
 				this.terminalAtom = a;
-				//System.out.println("right");
+				// System.out.println("right");
 			}
 		}
 		this.rotateToFit();
@@ -56,6 +56,7 @@ public class CmbMolecule {
 
 	public double[] getcenter() {
 		double[] axis = { 0, 0, 0 };
+		//double[] discountAxis = { 0, 0, 0 };
 		for (Atom a : this.atomList) {
 			axis[0] += a.innerX;
 			axis[1] += a.innerY;

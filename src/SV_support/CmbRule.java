@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public class CmbRule implements Cloneable {
 	public boolean isPermit;
+	public boolean mustReduplicate;
 	public ArrayList<MolType> typeList = new ArrayList<MolType>();
 
-	public CmbRule(String[] str) {
+	public CmbRule(String[] str, boolean mustReduplicate) {
+		this.mustReduplicate = mustReduplicate;
 		this.isPermit = true;
 		for (int i = 0; i < str.length; i++) {
 			if (str[i].equals("A")) {

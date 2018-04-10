@@ -15,6 +15,7 @@ public class Function_test {
 	 * @throws NumberFormatException
 	 */
 	public static void main(String[] args) throws NumberFormatException, CloneNotSupportedException {
+		long st = System.currentTimeMillis();
 		MoleculeDepot md = null;
 		IOservice io = new IOservice();
 		try {
@@ -22,10 +23,12 @@ public class Function_test {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String[] str = { "D", "A" };
-		md.cmbRuleCreate(str);
+		String[] str = { "C", "D", "S", "A", "S", "D", "C" };
+		md.cmbRuleCreate(str, true);
 		for (CmbMolecule cm : md.db_link.cmbList) {
 			io.export(cm);
 		}
+		long se = System.currentTimeMillis();
+		System.out.println("run time: " + String.valueOf(se - st) + " millis");
 	}
 }

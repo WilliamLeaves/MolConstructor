@@ -55,4 +55,8 @@ public class EndCapping extends Molecule {
 		return m;
 	}
 
+	public Atom getRight() {
+		return this.rightAtom;
+	}
+
 }

@@ -56,8 +56,9 @@ public class MoleculeDepot {
 		}
 	}
 
-	public boolean cmbRuleCreate(String[] str) throws NumberFormatException, CloneNotSupportedException {
-		CmbRule rule = new CmbRule(str);
+	public boolean cmbRuleCreate(String[] str, boolean mustReduplicate)
+			throws NumberFormatException, CloneNotSupportedException {
+		CmbRule rule = new CmbRule(str, mustReduplicate);
 		if (rule.isPermit) {
 			for (CmbRule cr : this.ruleList) {
 				if (cr.typeList.size() != rule.typeList.size()) {
@@ -115,26 +116,97 @@ public class MoleculeDepot {
 	 * @return
 	 */
 	private ArrayList<String[]> molListCreate(CmbRule rule) {
-		int allSize = 1;
-		int[] size = new int[rule.typeList.size()];
-		int depth = rule.typeList.size();
-		for (int i = 0; i < depth; i++) {
-			size[i] = getSize(rule.typeList.get(i));
-			allSize *= size[i];
-		}
 		ArrayList<String[]> charList = new ArrayList<String[]>();
-		for (int i = 0; i < allSize; i++) {
-			String[] str = new String[depth];
-			charList.add(str);
-		}
-		int repeatTime = 1;
-		for (int i = 0; i < depth; i++) {
-			for (int j = 0; j < charList.size(); j++) {
-				int ci = (j % (repeatTime * size[depth - i - 1])) / repeatTime;
-				String c = String.valueOf(ci);
-				charList.get(j)[depth - i - 1] = c;
+		if (rule.mustReduplicate) {
+			int allSize = 1;
+			int depth = rule.typeList.size();
+			if (rule.typeList.contains(MolType.A)) {
+				allSize *= this.getSize(MolType.A);
 			}
-			repeatTime *= size[depth - i - 1];
+			if (rule.typeList.contains(MolType.S)) {
+				allSize *= this.getSize(MolType.S);
+			}
+			if (rule.typeList.contains(MolType.C)) {
+				allSize *= this.getSize(MolType.C);
+			}
+			if (rule.typeList.contains(MolType.D)) {
+				allSize *= this.getSize(MolType.D);
+			}
+			for (int i = 0; i < allSize; i++) {
+				String[] str = new String[depth];
+				charList.add(str);
+			}
+			int repeatTime = 1;
+			if (rule.typeList.contains(MolType.A)) {
+				for (int i = 0; i < charList.size(); i++) {
+					for (int j = 0; j < depth; j++) {
+						if (rule.typeList.get(j).equals(MolType.A)) {
+							int ci = (i % (this.getSize(MolType.A) * repeatTime)) / repeatTime;
+							String c = String.valueOf(ci);
+							charList.get(i)[j] = c;
+						}
+					}
+				}
+				repeatTime *= this.getSize(MolType.A);
+			}
+			if (rule.typeList.contains(MolType.C)) {
+				for (int i = 0; i < charList.size(); i++) {
+					for (int j = 0; j < depth; j++) {
+						if (rule.typeList.get(j).equals(MolType.C)) {
+							int ci = (i % (this.getSize(MolType.C) * repeatTime)) / repeatTime;
+							String c = String.valueOf(ci);
+							charList.get(i)[j] = c;
+						}
+					}
+				}
+				repeatTime *= this.getSize(MolType.C);
+			}
+			if (rule.typeList.contains(MolType.S)) {
+				for (int i = 0; i < charList.size(); i++) {
+					for (int j = 0; j < depth; j++) {
+						if (rule.typeList.get(j).equals(MolType.S)) {
+							int ci = (i % (this.getSize(MolType.S) * repeatTime)) / repeatTime;
+							String c = String.valueOf(ci);
+							charList.get(i)[j] = c;
+						}
+					}
+				}
+				repeatTime *= this.getSize(MolType.S);
+			}
+			if (rule.typeList.contains(MolType.D)) {
+				for (int i = 0; i < charList.size(); i++) {
+					for (int j = 0; j < depth; j++) {
+						if (rule.typeList.get(j).equals(MolType.D)) {
+							int ci = (i % (this.getSize(MolType.D) * repeatTime)) / repeatTime;
+							String c = String.valueOf(ci);
+							charList.get(i)[j] = c;
+						}
+					}
+				}
+				repeatTime *= this.getSize(MolType.D);
+			}
+			System.out.println("");
+		} else {
+			int allSize = 1;
+			int[] size = new int[rule.typeList.size()];
+			int depth = rule.typeList.size();
+			for (int i = 0; i < depth; i++) {
+				size[i] = getSize(rule.typeList.get(i));
+				allSize *= size[i];
+			}
+			for (int i = 0; i < allSize; i++) {
+				String[] str = new String[depth];
+				charList.add(str);
+			}
+			int repeatTime = 1;
+			for (int i = 0; i < depth; i++) {
+				for (int j = 0; j < charList.size(); j++) {
+					int ci = (j % (repeatTime * size[depth - i - 1])) / repeatTime;
+					String c = String.valueOf(ci);
+					charList.get(j)[depth - i - 1] = c;
+				}
+				repeatTime *= size[depth - i - 1];
+			}
 		}
 		return charList;
 	}
