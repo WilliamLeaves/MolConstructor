@@ -1,4 +1,7 @@
-/SV/
-/test/
-/SV_support/
 /DB/
+/DB_support/
+/SV/
+/SV_support/
+/UI/
+/UI_support/
+/test/
