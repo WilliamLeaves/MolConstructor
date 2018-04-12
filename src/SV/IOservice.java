@@ -140,7 +140,7 @@ public class IOservice {
 		}
 		m.index = index;
 		m.rotateToFit();
-		// this.export(m);
+		this.export(m);
 		return m;
 	}
 
