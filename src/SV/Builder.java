@@ -38,6 +38,7 @@ public class Builder {
 	 * @param cmol
 	 */
 	private void combine(Molecule mol, CmbMolecule cmol) {
+<<<<<<< HEAD
 		boolean isComplete = false;
 		int split = 12;
 
@@ -114,6 +115,16 @@ public class Builder {
 			a.clockWiseRotateX(360 * maxIndex / split);
 		}
 		//System.out.println("X rotated " + 360 * maxIndex / split + " degree");
+=======
+		System.out.println("*************mol");
+		for (Atom a : mol.atomList) {
+			System.out.println(a.element + "," + a.innerX + "," + a.innerY + "," + a.innerZ);
+		}
+		System.out.println("**************cmol");
+		for (Atom a : cmol.atomList) {
+			System.out.println(a.element + "," + a.innerX + "," + a.innerY + "," + a.innerZ);
+		}
+>>>>>>> parent of 130e820... 20180331-1
 		double[] axis;
 		axis = aligment(cmol.terminalAtom, mol.getNearestAtom(mol.getLeft()));
 		cmol.atomList.remove(m);
@@ -148,8 +159,13 @@ public class Builder {
 	 */
 	private double[] aligment(Atom left, Atom right) {
 		double[] axis = new double[3];
+<<<<<<< HEAD
 		axis[0] = left.innerX - right.innerX + 0.3;
 		axis[1] = left.innerY - right.innerY;
+=======
+		axis[0] = left.innerX - right.innerX;
+		axis[1] = left.innerX - right.innerY;
+>>>>>>> parent of 130e820... 20180331-1
 		axis[2] = left.innerZ - right.innerZ;
 		return axis;
 	}

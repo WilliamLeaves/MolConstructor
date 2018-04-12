@@ -2,7 +2,7 @@ package SV_support;
 
 import java.util.ArrayList;
 
-public abstract class Molecule implements Cloneable {
+public abstract class Molecule {
 	public int index = 0;
 	public String name = "Unnamed";
 	public String image2DAddress = "";
@@ -19,10 +19,9 @@ public abstract class Molecule implements Cloneable {
 	 */
 	public abstract MolType getType();
 
-	public Atom getLeft() {
-		return this.leftAtom;
-	}
+	public abstract Atom getLeft();
 
+<<<<<<< HEAD
 	public Atom getRight() {
 		return this.rightAtom;
 	}
@@ -33,6 +32,8 @@ public abstract class Molecule implements Cloneable {
 	 * make the terminal atom have max x-axis
 	 */
 	public void rotateToFit() {
+<<<<<<< HEAD
+<<<<<<< HEAD
 		double[] ali = { this.getLeft().innerX, this.getLeft().innerY, this.getLeft().innerZ };
 		for (Atom a : this.atomList) {
 			a.innerX -= ali[0];
@@ -43,11 +44,20 @@ public abstract class Molecule implements Cloneable {
 		double N = 360;
 		Atom t = (Atom) this.leftAtom.clone();
 		Atom tn = (Atom) this.getNearestAtom(t).clone();
+=======
+		double N = 360;
+=======
+		double N = 360;
+>>>>>>> parent of 883c589... 20180403-2
+		Atom t = this.leftAtom;
+		Atom tn = this.getNearestAtom(t);
+>>>>>>> parent of 883c589... 20180403-2
 
-		// rotate along Z and get the degree
 		double des = Double.MAX_VALUE;
 		int nz = 0;
 		for (int i = 0; i < N; i++) {
+<<<<<<< HEAD
+<<<<<<< HEAD
 			t.clockWiseRotateZ(360 / N);
 			tn.clockWiseRotateZ(360 / N);
 			if (Math.abs(this.getAtomVector(t, tn)[1]) < des && this.getAtomVector(t, tn)[0] < 0) {
@@ -79,9 +89,40 @@ public abstract class Molecule implements Cloneable {
 				ny = i;
 			}
 			// System.out.println(i + ":" + String.valueOf(this.getAtomVector(t, tn)[2]));
+=======
+			t.clockWiseRotateZ(1 / N);
+			tn.clockWiseRotateZ(1 / N);
+			if (Math.abs(this.getAtomVector(t, tn)[1]) < des) {
+				des = Math.abs(this.getAtomVector(t, tn)[1]);
+				nz = i;
+			}
 		}
-
+		des = Double.MAX_VALUE;
+		int ny = 0;
+		for (int i = 0; i < N; i++) {
+=======
+			t.clockWiseRotateZ(1 / N);
+			tn.clockWiseRotateZ(1 / N);
+			if (Math.abs(this.getAtomVector(t, tn)[1]) < des) {
+				des = Math.abs(this.getAtomVector(t, tn)[1]);
+				nz = i;
+			}
+		}
+		des = Double.MAX_VALUE;
+		int ny = 0;
+		for (int i = 0; i < N; i++) {
+>>>>>>> parent of 883c589... 20180403-2
+			t.clockWiseRotateY(1 / N);
+			tn.clockWiseRotateY(1 / N);
+			if (Math.abs(this.getAtomVector(t, tn)[2]) < des) {
+				des = Math.abs(this.getAtomVector(t, tn)[2]);
+				ny = i;
+			}
+<<<<<<< HEAD
+>>>>>>> parent of 883c589... 20180403-2
+		}
 		for (Atom a : this.atomList) {
+<<<<<<< HEAD
 			a.clockWiseRotateY(360 * (ny + 1) / N);
 		}
 		// System.out.println("after rotate Y des Y " + ny + ":"
@@ -139,6 +180,26 @@ public abstract class Molecule implements Cloneable {
 		// System.out.println("after rotate X des Z " + nx + ":"
 		// + String.valueOf(this.getAtomVector(this.getLeft(),
 		// this.atomList.get(disList[2]))[2]));
+=======
+			if (!a.equal(tn)) {
+				a.clockWiseRotateZ(nz/N);
+				a.clockWiseRotateY(ny/N);
+			}
+		}
+		System.out.println(
+				this.getAtomVector(t, tn)[0] + "," + this.getAtomVector(t, tn)[1] + "," + this.getAtomVector(t, tn)[2]);
+>>>>>>> parent of 883c589... 20180403-2
+=======
+		}
+		for (Atom a : this.atomList) {
+			if (!a.equal(tn)) {
+				a.clockWiseRotateZ(nz/N);
+				a.clockWiseRotateY(ny/N);
+			}
+		}
+		System.out.println(
+				this.getAtomVector(t, tn)[0] + "," + this.getAtomVector(t, tn)[1] + "," + this.getAtomVector(t, tn)[2]);
+>>>>>>> parent of 883c589... 20180403-2
 	}
 
 	public Atom getNearestAtom(Atom atom) {
@@ -171,5 +232,9 @@ public abstract class Molecule implements Cloneable {
 		axis[2] /= this.atomList.size();
 		return axis;
 	}
+=======
+	public abstract Atom getRight();
+>>>>>>> parent of 130e820... 20180331-1
 
+	public abstract Molecule getClone() throws CloneNotSupportedException;
 }
