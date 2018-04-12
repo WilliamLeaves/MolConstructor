@@ -33,6 +33,7 @@ public abstract class Molecule {
 	 */
 	public void rotateToFit() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		double[] ali = { this.getLeft().innerX, this.getLeft().innerY, this.getLeft().innerZ };
 		for (Atom a : this.atomList) {
 			a.innerX -= ali[0];
@@ -45,6 +46,9 @@ public abstract class Molecule {
 		Atom tn = (Atom) this.getNearestAtom(t).clone();
 =======
 		double N = 360;
+=======
+		double N = 360;
+>>>>>>> parent of 883c589... 20180403-2
 		Atom t = this.leftAtom;
 		Atom tn = this.getNearestAtom(t);
 >>>>>>> parent of 883c589... 20180403-2
@@ -52,6 +56,7 @@ public abstract class Molecule {
 		double des = Double.MAX_VALUE;
 		int nz = 0;
 		for (int i = 0; i < N; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			t.clockWiseRotateZ(360 / N);
 			tn.clockWiseRotateZ(360 / N);
@@ -95,12 +100,25 @@ public abstract class Molecule {
 		des = Double.MAX_VALUE;
 		int ny = 0;
 		for (int i = 0; i < N; i++) {
+=======
+			t.clockWiseRotateZ(1 / N);
+			tn.clockWiseRotateZ(1 / N);
+			if (Math.abs(this.getAtomVector(t, tn)[1]) < des) {
+				des = Math.abs(this.getAtomVector(t, tn)[1]);
+				nz = i;
+			}
+		}
+		des = Double.MAX_VALUE;
+		int ny = 0;
+		for (int i = 0; i < N; i++) {
+>>>>>>> parent of 883c589... 20180403-2
 			t.clockWiseRotateY(1 / N);
 			tn.clockWiseRotateY(1 / N);
 			if (Math.abs(this.getAtomVector(t, tn)[2]) < des) {
 				des = Math.abs(this.getAtomVector(t, tn)[2]);
 				ny = i;
 			}
+<<<<<<< HEAD
 >>>>>>> parent of 883c589... 20180403-2
 		}
 		for (Atom a : this.atomList) {
@@ -163,6 +181,17 @@ public abstract class Molecule {
 		// + String.valueOf(this.getAtomVector(this.getLeft(),
 		// this.atomList.get(disList[2]))[2]));
 =======
+			if (!a.equal(tn)) {
+				a.clockWiseRotateZ(nz/N);
+				a.clockWiseRotateY(ny/N);
+			}
+		}
+		System.out.println(
+				this.getAtomVector(t, tn)[0] + "," + this.getAtomVector(t, tn)[1] + "," + this.getAtomVector(t, tn)[2]);
+>>>>>>> parent of 883c589... 20180403-2
+=======
+		}
+		for (Atom a : this.atomList) {
 			if (!a.equal(tn)) {
 				a.clockWiseRotateZ(nz/N);
 				a.clockWiseRotateY(ny/N);
