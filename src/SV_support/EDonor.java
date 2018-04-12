@@ -17,8 +17,9 @@ public class EDonor extends Molecule {
 	}
 
 	@Override
-	public EDonor getClone() {
+	public Atom getLeft() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		EDonor m = new EDonor();
 		m.image2DAddress = this.image2DAddress;
 		m.index = this.index;
@@ -33,5 +34,20 @@ public class EDonor extends Molecule {
 			}
 		}
 		return m;
+=======
+		return this.leftAtom;
+	}
+
+	@Override
+	public Atom getRight() {
+		// TODO Auto-generated method stub
+		return this.rightAtom;
+	}
+
+	@Override
+	public EDonor getClone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return (EDonor) this.clone();
+>>>>>>> parent of 130e820... 20180331-1
 	}
 }

@@ -17,8 +17,9 @@ public class EAccepter extends Molecule {
 	}
 
 	@Override
-	public EAccepter getClone() {
+	public Atom getLeft() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		EAccepter m = new EAccepter();
 		m.image2DAddress = this.image2DAddress;
 		m.index = this.index;
@@ -33,5 +34,20 @@ public class EAccepter extends Molecule {
 			}
 		}
 		return m;
+=======
+		return this.leftAtom;
+	}
+
+	@Override
+	public Atom getRight() {
+		// TODO Auto-generated method stub
+		return this.rightAtom;
+	}
+
+	@Override
+	public EAccepter getClone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return (EAccepter) this.clone();
+>>>>>>> parent of 130e820... 20180331-1
 	}
 }

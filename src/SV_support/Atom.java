@@ -1,6 +1,6 @@
 package SV_support;
 
-public class Atom implements Cloneable {
+public class Atom {
 	public String element;
 	public double innerX;
 	public double innerY;
@@ -29,6 +29,7 @@ public class Atom implements Cloneable {
 		}
 		return false;
 	}
+<<<<<<< HEAD
 
 	public Object clone() {
 		Atom a = null;
@@ -88,4 +89,6 @@ public class Atom implements Cloneable {
 			this.innerZ = z;
 		}
 	}
+=======
+>>>>>>> parent of 130e820... 20180331-1
 }

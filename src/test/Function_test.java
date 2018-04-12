@@ -23,6 +23,7 @@ public class Function_test {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 		String[] str = { "D", "A" };
 		// String[] str={"A","D","A"};
 		// String[] str = { "D", "A", "D" };
@@ -35,6 +36,10 @@ public class Function_test {
 		//String[] str = { "C", "D", "S", "A", "C" };
 
 		md.cmbRuleCreate(str, true);
+=======
+		String[] str = { "C", "A", "C" };
+		md.cmbRuleCreate(str);
+>>>>>>> parent of 130e820... 20180331-1
 		for (CmbMolecule cm : md.db_link.cmbList) {
 			//io.export(cm);
 		}

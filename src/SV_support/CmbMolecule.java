@@ -116,6 +116,7 @@ public class CmbMolecule {
 		for (Atom a : this.atomList) {
 			a.clockWiseRotateY(360 * (ny + 1) / N);
 		}
+<<<<<<< HEAD
 
 		int[] disList = new int[this.atomList.size()];
 		for (int i = 0; i < disList.length; i++) {
@@ -150,5 +151,8 @@ public class CmbMolecule {
 
 	public double[] getAtomVector(Atom a, Atom b) {
 		return new double[] { a.innerX - b.innerX, a.innerY - b.innerY, a.innerZ - b.innerZ };
+=======
+		this.terminalAtom = mol.getLeft();
+>>>>>>> parent of 130e820... 20180331-1
 	}
 }

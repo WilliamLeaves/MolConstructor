@@ -20,8 +20,9 @@ public class EndCapping extends Molecule {
 	}
 
 	@Override
-	public EndCapping getClone() {
+	public Atom getLeft() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		EndCapping m = new EndCapping();
 		m.image2DAddress = this.image2DAddress;
 		m.index = this.index;
@@ -53,6 +54,21 @@ public class EndCapping extends Molecule {
 
 		}
 		return m;
+=======
+		return this.leftAtom;
+	}
+
+	@Override
+	public Atom getRight() {
+		// TODO Auto-generated method stub
+		return this.rightAtom;
+	}
+
+	@Override
+	public EndCapping getClone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return (EndCapping) this.clone();
+>>>>>>> parent of 130e820... 20180331-1
 	}
 
 	public Atom getRight() {
